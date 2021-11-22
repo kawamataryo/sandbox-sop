@@ -1,11 +1,11 @@
 # sandbox sop
-sandbox for same origin policy.
+Sandbox to check the same origin policy behavior.
 
-## run
+## build
 
 
 ```
 $ docker compose up
 ```
 
-access to http://localshot:3030
+Access to http://localshot:3030
