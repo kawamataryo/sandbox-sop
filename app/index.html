@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cors sandbox</title>
+</head>
+<style>
+  .success {
+    color: white;
+    background-color: green;
+  }
+  .error {
+    color: white;
+    background-color: red;
+  }
+</style>
+<body>
+<h1>CORS sandbox</h1>
+
+<hr />
+<h2>No CORS</h2>
+GET http://localhost:3031/api/no-cors
+<p id="no-cors-result">[result]</p>
+<button id="no-cors-btn">Fetch</button>
+
+<hr />
+<h2>CORS GET</h2>
+GET http://localhost:3031/api/simple-cors
+<p id="cors-get-result">[result]</p>
+<button id="cors-get-btn">Fetch</button>
+
+<hr />
+<h2>CORS POST</h2>
+POST http://localhost:3031/api/simple-cors
+<p id="cors-post-result">[result]</p>
+<button id="cors-post-btn">Fetch</button>
+
+<hr />
+<h2>CORS DELETE</h2>
+DELETE http://localhost:3031/api/complex-cors
+<p id="cors-delete-result">[result]</p>
+<button id="cors-delete-btn">Fetch</button>
+
+<script>
+document.addEventListener("DOMContentLoaded",() => {
+  const setFetchEvent = (url, method, btnSelector, resultSelector) => {
+    document.querySelector(btnSelector).addEventListener('click', async () => {
+      const result = document.querySelector(resultSelector)
+      try {
+        const res = await fetch(url, {
+          method
+        })
+        result.innerHTML = await res.text()
+        result.classList.add('success')
+        result.classList.remove('error')
+      } catch (e) {
+        console.error(e)
+        result.innerHTML = e
+        result.classList.add('error')
+        result.classList.remove('sucess')
+      }
+    })
+  }
+
+  setFetchEvent('http://localhost:3031/api/no-cors', 'GET', '#no-cors-btn', '#no-cors-result')
+  setFetchEvent('http://localhost:3031/api/simple-cors', 'GET', '#cors-get-btn', '#cors-get-result')
+  setFetchEvent('http://localhost:3031/api/simple-cors', 'POST', '#cors-post-btn', '#cors-post-result')
+  setFetchEvent('http://localhost:3031/api/complex-cors', 'DELETE', '#cors-delete-btn', '#cors-delete-result')
+})
+</script>
+</body>
+</html>

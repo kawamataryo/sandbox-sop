@@ -1,0 +1,13 @@
+{
+  "name": "cors",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@tinyhttp/app": "latest",
+    "@tinyhttp/cors": "^2.0.0",
+    "@tinyhttp/logger": "latest"
+  },
+  "type": "module"
+}
