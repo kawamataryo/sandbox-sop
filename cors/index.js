@@ -7,20 +7,20 @@ const app = new App()
 app
 .use(logger())
 .get('/api/no-cors/',
-  (_, res) => {
-    res.status(200).send(`success. ${Date.now()}`)
+  (req, res) => {
+    res.status(200).send(`success. method: ${req.method}, time: ${Date.now()}`)
   })
 .get('/api/simple-cors/', cors(),
-  (_, res) => {
-    res.status(200).send(`success. ${Date.now()}`)
+  (req, res) => {
+    res.status(200).send(`success. method: ${JSON.stringify(req.method)}, time: ${Date.now()}`)
   })
 .post('/api/simple-cors/', cors(),
-  (_, res) => {
-    res.status(200).send(`success. ${Date.now()}`)
+  (req, res) => {
+    res.status(200).send(`success. method: ${req.method}, time: ${Date.now()}`)
   })
 .options('/api/complex-cors/', cors())
 .delete('/api/complex-cors/', cors(),
-  (_, res) => {
-    res.status(200).send(`success. ${Date.now()}`)
+  (req, res) => {
+    res.status(200).send(`success. method: ${req.method}, time: ${Date.now()}`)
   })
 .listen(3031, () => console.log(`Listening on http://localhost:3031`))
